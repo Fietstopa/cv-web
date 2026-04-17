@@ -6,7 +6,7 @@ const NAV_LINKS = [
   { label: 'O mně', href: '#aboutmi' },
   { label: 'Projekty', href: '#projekty' },
   { label: 'Vzdělání', href: '#vzdelani' },
-  { label: 'Koníčky', href: '#hobbies' },
+  { label: 'Koníčky', href: '#/konicky' },
   { label: 'Kontakt', href: '#kontakt' },
 ]
 

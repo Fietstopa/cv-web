@@ -26,6 +26,14 @@ const PROJECTS = [
     tags: ['Node.js', 'MongoDB', 'REST API'],
   },
   {
+    title: 'BookNest',
+    description:
+      'Aplikace s mapou nejbližších knihobudek pro čtenáře a lidi co se chtějí zbavit starých knih.',
+    image: 'img/booknest.png',
+    link: 'https://github.com/Fietstopa/booknest-app',
+    tags: ['Kotlin', 'Mobile', 'App'],
+  },
+  {
     title: 'Cinemati',
     description:
       'Web pro zobrazení, ukládání a doporučení filmů s registrací přes Firebase.',

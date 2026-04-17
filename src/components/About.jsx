@@ -10,6 +10,7 @@ const SKILLS = [
   { name: 'JavaScript', icon: 'img/js.svg' },
   { name: 'C++', icon: 'img/cpp.svg' },
   { name: 'Python', icon: 'img/python.svg' },
+  { name: 'Kotlin', icon: 'img/kotlin.svg' },
   { name: 'Node.js', icon: 'img/node.svg' },
   { name: 'MongoDB', icon: 'img/mongo.svg' },
   { name: 'SQL', icon: 'img/db.svg' },

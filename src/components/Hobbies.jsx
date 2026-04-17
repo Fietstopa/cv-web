@@ -135,7 +135,7 @@ export default function Hobbies() {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))',
           gap: 'clamp(2rem, 5vw, 3.5rem)',
-          alignItems: 'center',
+          alignItems: 'start',
         }}>
           {/* Left – text */}
           <div>
@@ -194,16 +194,13 @@ export default function Hobbies() {
             </p>
           </div>
 
-          {/* Right – specs grid */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-            {/* Photo grid */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '8px',
-              marginBottom: '0.8rem',
-            }}>
-              {['3dprint-1.webp','3dprint-2.jpg','3dprint-3.jpg','3dprint-4.jpg'].map((file, i) => (
+          {/* Right – photo grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '8px',
+          }}>
+            {['3dprint-1.webp','3dprint-2.jpg','3dprint-3.jpg','3dprint-4.jpg'].map((file, i) => (
                 <motion.div
                   key={file}
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -224,9 +221,7 @@ export default function Hobbies() {
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                   />
                 </motion.div>
-              ))}
-            </div>
-
+            ))}
           </div>
         </div>
       </motion.div>
@@ -267,8 +262,8 @@ export default function Hobbies() {
           </div>
 
           {/* Right – text + specs */}
-          <div style={{ padding: 'clamp(1.8rem, 4vw, 2.8rem)', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-          {/* Left – text */}
+          <div style={{ padding: 'clamp(1.8rem, 4vw, 2.8rem)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {/* Text */}
           <div>
             <div style={{
               display: 'inline-flex',
@@ -309,10 +304,32 @@ export default function Hobbies() {
               testovací aplikace a self-hosted služby – od správy fotek přes organizaci dokumentů
               až po Minecraft server pro kamarády.
             </p>
-            <p style={{ color: 'rgba(255,255,255,0.68)', lineHeight: 1.8, fontSize: '1rem' }}>
+            <p style={{ color: 'rgba(255,255,255,0.68)', lineHeight: 1.8, fontSize: '1rem', marginBottom: '1.4rem' }}>
               Baví mě spravovat server, experimentovat s novými službami a mít vlastní
               infrastrukturu pod kontrolou.
             </p>
+            <motion.a
+              href="https://mausserver.cz"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.03, borderColor: 'rgba(154,6,223,0.6)' }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '0.7rem 1.2rem',
+                background: 'rgba(154,6,223,0.12)',
+                border: '1px solid rgba(154,6,223,0.3)',
+                borderRadius: '10px',
+                color: '#c060ff',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+                width: 'fit-content',
+              }}
+              data-cursor-hover
+            >
+              🌐 mausserver.cz
+            </motion.a>
           </div>
 
           {/* Right – specs */}
