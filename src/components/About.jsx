@@ -56,9 +56,8 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="aboutmi" ref={ref} className="grid-bg">
+    <section id="aboutmi" ref={ref} className="grid-bg" style={{ padding: 'clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem)' }}>
       <div style={{
-        padding: 'clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem)',
         maxWidth: '1200px',
         margin: '0 auto',
       }}>

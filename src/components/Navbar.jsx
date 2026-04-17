@@ -6,7 +6,8 @@ const NAV_LINKS = [
   { label: 'O mně', href: '#aboutmi' },
   { label: 'Projekty', href: '#projekty' },
   { label: 'Vzdělání', href: '#vzdelani' },
-  { label: 'Koníčky', href: '#/konicky' },
+  { label: 'Zkušenosti', href: '#zkusenosti' },
+  { label: 'Hobby', href: '#/konicky' },
   { label: 'Kontakt', href: '#kontakt' },
 ]
 
@@ -56,12 +57,33 @@ export default function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <nav style={{ display: 'flex', gap: '2.2rem' }} className="desktop-nav">
+        <nav style={{ display: 'flex', gap: '2.2rem', alignItems: 'center' }} className="desktop-nav">
           {NAV_LINKS.map((link) => (
             <NavLink key={link.href} href={link.href}>
               {link.label}
             </NavLink>
           ))}
+          <motion.a
+            href="cv.pdf"
+            download="Bohdan-Myshko-CV.pdf"
+            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(127,0,255,0.45)' }}
+            whileTap={{ scale: 0.96 }}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'linear-gradient(135deg, #7f00ff, #e100ff)',
+              color: 'white',
+              fontWeight: 600,
+              fontSize: '0.9rem',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              letterSpacing: '0.02em',
+            }}
+            data-cursor-hover
+          >
+            .pdf
+          </motion.a>
         </nav>
 
         {/* Hamburger */}
@@ -151,6 +173,28 @@ export default function Navbar() {
                 {link.label}
               </motion.a>
             ))}
+            <motion.a
+              href="cv.pdf"
+              download="Bohdan-Myshko-CV.pdf"
+              onClick={handleLink}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: NAV_LINKS.length * 0.06, duration: 0.3 }}
+              style={{
+                marginTop: '1rem',
+                background: 'linear-gradient(135deg, #7f00ff, #e100ff)',
+                color: 'white',
+                fontWeight: 600,
+                fontSize: '1.1rem',
+                padding: '0.8rem 1.4rem',
+                borderRadius: '10px',
+                textAlign: 'center',
+                letterSpacing: '0.02em',
+                alignSelf: 'flex-start',
+              }}
+            >
+              cv.pdf
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>

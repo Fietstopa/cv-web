@@ -166,9 +166,8 @@ export default function Education() {
   const isMobile = useIsMobile()
 
   return (
-    <section id="vzdelani" className="grid-bg">
+    <section id="vzdelani" className="grid-bg" style={{ padding: 'clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem)' }}>
       <div style={{
-        padding: 'clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem)',
         maxWidth: '1200px',
         margin: '0 auto',
         position: 'relative',

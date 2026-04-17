@@ -37,9 +37,8 @@ const HOMELAB_SERVICES = [
 
 export default function Hobbies() {
   return (
-    <section id="hobbies" className="grid-bg">
+    <section id="hobbies" className="grid-bg" style={{ padding: 'clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem)' }}>
       <div style={{
-        padding: 'clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem)',
         maxWidth: '1200px',
         margin: '0 auto',
       }}>
@@ -56,7 +55,7 @@ export default function Hobbies() {
           marginBottom: '0.5rem',
         }}
       >
-        {'<Koníčky />'}
+        {'<Hobby />'}
       </motion.p>
 
       <motion.h2
