@@ -13,28 +13,28 @@ const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'xxxxxxxxx
 const SOCIAL = [
   {
     name: 'GitHub',
-    icon: '/img/gh.png',
+    icon: 'img/gh.png',
     href: 'https://github.com/Fietstopa',
     color: '#6e7681',
     hoverColor: '#e0e0e0',
   },
   {
     name: 'LinkedIn',
-    icon: '/img/linkedin.png',
+    icon: 'img/linkedin.png',
     href: 'https://www.linkedin.com/in/bohdan-mauser-716577206/',
     color: '#0a66c2',
     hoverColor: '#0a66c2',
   },
   {
     name: 'Instagram',
-    icon: '/img/ig.png',
+    icon: 'img/ig.png',
     href: 'https://www.instagram.com/bohdxn.x/',
     color: '#e1306c',
     hoverColor: '#e1306c',
   },
   {
     name: 'Facebook',
-    icon: '/img/fb.png',
+    icon: 'img/fb.png',
     href: 'https://www.facebook.com/profile.php?id=100014153014796',
     color: '#4267b2',
     hoverColor: '#4267b2',

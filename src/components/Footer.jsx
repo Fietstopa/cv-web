@@ -10,10 +10,10 @@ const FOOTER_LINKS = [
 ]
 
 const SOCIAL = [
-  { name: 'GitHub', icon: '/img/gh.png', href: 'https://github.com/Fietstopa' },
-  { name: 'LinkedIn', icon: '/img/linkedin.png', href: 'https://www.linkedin.com/in/bohdan-mauser-716577206/' },
-  { name: 'Instagram', icon: '/img/ig.png', href: 'https://www.instagram.com/bohdxn.x/' },
-  { name: 'Facebook', icon: '/img/fb.png', href: 'https://www.facebook.com/profile.php?id=100014153014796' },
+  { name: 'GitHub', icon: 'img/gh.png', href: 'https://github.com/Fietstopa' },
+  { name: 'LinkedIn', icon: 'img/linkedin.png', href: 'https://www.linkedin.com/in/bohdan-mauser-716577206/' },
+  { name: 'Instagram', icon: 'img/ig.png', href: 'https://www.instagram.com/bohdxn.x/' },
+  { name: 'Facebook', icon: 'img/fb.png', href: 'https://www.facebook.com/profile.php?id=100014153014796' },
 ]
 
 export default function Footer() {

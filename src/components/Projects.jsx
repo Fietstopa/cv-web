@@ -5,7 +5,7 @@ const PROJECTS = [
     title: 'Web pro Fušku',
     description:
       'Navrhl a postavil jsem landing page pro startupovou aplikaci Fuška. Responzivní design, e-mailový formulář, čistý kód a rychlé načítání.',
-    image: '/img/fuska.png',
+    image: 'img/fuska.png',
     link: 'https://fuska.net',
     tags: ['React', 'CSS', 'EmailJS'],
   },
@@ -13,7 +13,7 @@ const PROJECTS = [
     title: 'Fotostudio Web',
     description:
       'Webová React stránka s rezervačním systémem pro fotostudio Imagia v Brně.',
-    image: '/img/imagia.png',
+    image: 'img/imagia.png',
     link: 'https://imagiafotostudio.cz',
     tags: ['React', 'Reservation', 'UI/UX'],
   },
@@ -21,7 +21,7 @@ const PROJECTS = [
     title: 'Trading API',
     description:
       'REST API napsané v Node.js, které porovnává ceny kryptoměn na 10 burzách a ukládá je do MongoDB.',
-    image: '/img/trading.jpg',
+    image: 'img/trading.jpg',
     link: 'https://github.com/Fietstopa/Crypto-price-tracker',
     tags: ['Node.js', 'MongoDB', 'REST API'],
   },
@@ -29,7 +29,7 @@ const PROJECTS = [
     title: 'Cinemati',
     description:
       'Web pro zobrazení, ukládání a doporučení filmů s registrací přes Firebase.',
-    image: '/img/cinemati.png',
+    image: 'img/cinemati.png',
     link: 'https://cinemati.vercel.app',
     tags: ['React', 'Firebase', 'TMDB API'],
   },

@@ -2,19 +2,19 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
 const SKILLS = [
-  { name: 'React', icon: '/img/react.svg' },
-  { name: 'Tailwind', icon: '/img/tailwind.svg' },
-  { name: 'Figma', icon: '/img/figma.svg' },
-  { name: 'HTML', icon: '/img/html.svg' },
-  { name: 'CSS', icon: '/img/css.svg' },
-  { name: 'JavaScript', icon: '/img/js.svg' },
-  { name: 'C++', icon: '/img/cpp.svg' },
-  { name: 'Python', icon: '/img/python.svg' },
-  { name: 'Node.js', icon: '/img/node.svg' },
-  { name: 'MongoDB', icon: '/img/mongo.svg' },
-  { name: 'SQL', icon: '/img/db.svg' },
-  { name: 'Photoshop', icon: '/img/ps.svg' },
-  { name: 'Illustrator', icon: '/img/ai.svg' },
+  { name: 'React', icon: 'img/react.svg' },
+  { name: 'Tailwind', icon: 'img/tailwind.svg' },
+  { name: 'Figma', icon: 'img/figma.svg' },
+  { name: 'HTML', icon: 'img/html.svg' },
+  { name: 'CSS', icon: 'img/css.svg' },
+  { name: 'JavaScript', icon: 'img/js.svg' },
+  { name: 'C++', icon: 'img/cpp.svg' },
+  { name: 'Python', icon: 'img/python.svg' },
+  { name: 'Node.js', icon: 'img/node.svg' },
+  { name: 'MongoDB', icon: 'img/mongo.svg' },
+  { name: 'SQL', icon: 'img/db.svg' },
+  { name: 'Photoshop', icon: 'img/ps.svg' },
+  { name: 'Illustrator', icon: 'img/ai.svg' },
 ]
 
 function SkillBadge({ name, icon, index }) {

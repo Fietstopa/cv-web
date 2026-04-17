@@ -219,7 +219,7 @@ export default function Hobbies() {
                   }}
                 >
                   <img
-                    src={`/img/${file}`}
+                    src={`img/${file}`}
                     alt={`3D tisk ${i + 1}`}
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                   />
@@ -258,7 +258,7 @@ export default function Hobbies() {
           {/* Left – image */}
           <div style={{ overflow: 'hidden', minHeight: '280px' }}>
             <motion.img
-              src="/img/homelab.jpg"
+              src="img/homelab.jpg"
               alt="Homelab server"
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: 0.85 }}
               whileHover={{ scale: 1.03 }}
