@@ -64,8 +64,10 @@ export default function Navbar() {
             </NavLink>
           ))}
           <motion.a
-            href="cv.pdf"
+            href={`${import.meta.env.BASE_URL}bohdan_myshko_cv.pdf`}
             download="Bohdan-Myshko-CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(127,0,255,0.45)' }}
             whileTap={{ scale: 0.96 }}
             style={{
@@ -82,7 +84,7 @@ export default function Navbar() {
             }}
             data-cursor-hover
           >
-            .pdf
+            cv.pdf
           </motion.a>
         </nav>
 
@@ -174,8 +176,10 @@ export default function Navbar() {
               </motion.a>
             ))}
             <motion.a
-              href="cv.pdf"
+              href={`${import.meta.env.BASE_URL}bohdan_myshko_cv.pdf`}
               download="Bohdan-Myshko-CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={handleLink}
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
