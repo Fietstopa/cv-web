@@ -65,7 +65,7 @@ export default function About() {
           <Reveal style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '1.05rem', display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '62ch' }}>
             <p>
               Studuji <strong style={{ color: 'var(--text)', fontWeight: 500 }}>Otevřenou informatiku</strong> na Mendelově
-              univerzitě v Brně. Baví mě tvořit věci – od webových aplikací přes grafiku až po 3D tisk.
+              univerzitě v Brně. Vedle školy stavím vlastní projekty – teď hlavně platformu Fuškuj.
             </p>
             <p>
               Dělám <strong style={{ color: 'var(--text)', fontWeight: 500 }}>frontend i backend</strong> a píšu aplikace
