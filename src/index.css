@@ -5,45 +5,60 @@
 }
 
 :root {
-  --bg: #131313;
-  --bg-darker: #0c0c0c;
-  --bg-card: rgba(25, 25, 25, 0.7);
-  --accent: #7f00ff;
-  --accent-2: #e100ff;
-  --accent-mid: #9a06df;
-  --text: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.55);
-  --border: rgba(255, 255, 255, 0.08);
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface-2: #141414;
+  --text: #ededed;
+  --text-muted: #a1a1a1;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --accent: #0070f3;
+  --accent-text: #52a8ff;
+  --accent-bg: rgba(0, 112, 243, 0.12);
+  --accent-border: rgba(0, 112, 243, 0.45);
+  --danger: #ff6166;
+  --green: #34ad69;
+  --green-bg: rgba(52, 173, 105, 0.1);
+  --green-border: rgba(52, 173, 105, 0.5);
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
   --nav-height: 64px;
 }
 
 html {
   scroll-behavior: smooth;
-  cursor: none;
+  scroll-padding-top: var(--nav-height);
 }
 
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Geist', system-ui, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Hide default cursor everywhere */
-*, *:hover {
-  cursor: none !important;
+::selection {
+  background: rgba(0, 112, 243, 0.45);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-darker);
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 3px;
+  background: #333;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
 }
 
 a {
@@ -51,9 +66,8 @@ a {
   text-decoration: none;
 }
 
-button {
-  font-family: 'Space Grotesk', sans-serif;
-  cursor: none;
+button, input, textarea {
+  font-family: inherit;
 }
 
 img {
@@ -61,47 +75,49 @@ img {
   display: block;
 }
 
+/* Metadata: dates, tags, file names, specs */
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum';
+}
+
+/* Small section labels */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Sections stack as one sheet divided by hairlines */
+main > section + section {
+  border-top: 1px solid var(--border);
+}
+
 /* Dot-grid background pattern */
 .dot-grid {
-  background-image: radial-gradient(#ebebeb22 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-/* Cross/grid-lines background pattern – for alternating sections */
+/* Grid-lines background pattern – for alternating sections */
 .grid-bg {
-  background-color: #0e0e0e;
+  background-color: var(--bg);
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
-/* Section title style */
-.section-title {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 700;
-  margin-bottom: 3rem;
-  background: linear-gradient(to right, #7f00ff, #e100ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: inline-block;
-}
-
-/* Gradient text utility */
-.gradient-text {
-  background: linear-gradient(to right, #7f00ff, #e100ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Card glass effect */
-.glass-card {
-  background: rgba(22, 22, 22, 0.6);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  backdrop-filter: blur(12px);
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 /* Accessibility */
@@ -110,4 +126,5 @@ img {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+  html { scroll-behavior: auto; }
 }

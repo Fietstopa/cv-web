@@ -1,26 +1,39 @@
 import { motion } from 'framer-motion'
+import SectionHeading, { EASE_OUT } from './SectionHeading'
+
+const FEATURED = {
+  title: 'Fuškuj',
+  status: 'Ve vývoji',
+  summary:
+    'On-demand marketplace služeb pro Českou republiku. Klient zadá zakázku, mastr pošle nabídku, domluví se v chatu a práci uzavře oboustranné potvrzení a hodnocení.',
+  detail:
+    'Celou platformu stavím sám: REST API v NestJS nad PostgreSQL s PostGIS, veřejný web a admin v Next.js, mobilní appku ve Flutteru pro iOS i Android a nasazení v Dockeru na vlastním serveru.',
+  image: 'img/fuska-platforma.webp',
+  link: 'https://fuskuj.cz',
+  tags: ['NestJS', 'PostgreSQL', 'Next.js', 'Flutter', 'Docker'],
+}
 
 const PROJECTS = [
   {
     title: 'Web pro Fušku',
     description:
-      'Navrhl a postavil jsem landing page pro startupovou aplikaci Fuška. Responzivní design, e-mailový formulář, čistý kód a rychlé načítání.',
+      'Landing page pro startupovou aplikaci Fuška – návrh i vývoj, včetně kontaktního formuláře přes EmailJS.',
     image: 'img/fuska.png',
     link: 'https://fuska.net',
     tags: ['React', 'CSS', 'EmailJS'],
   },
   {
-    title: 'Fotostudio Web',
+    title: 'Fotostudio Imagia',
     description:
-      'Webová React stránka s rezervačním systémem pro fotostudio Imagia v Brně.',
+      'Web v Reactu s rezervačním systémem pro fotostudio Imagia v Brně.',
     image: 'img/imagia.png',
     link: 'https://imagiafotostudio.cz',
-    tags: ['React', 'Reservation', 'UI/UX'],
+    tags: ['React', 'Rezervace', 'UI/UX'],
   },
   {
     title: 'Trading API',
     description:
-      'REST API napsané v Node.js, které porovnává ceny kryptoměn na 10 burzách a ukládá je do MongoDB.',
+      'REST API v Node.js, které porovnává ceny kryptoměn na 10 burzách a ukládá je do MongoDB.',
     image: 'img/trading.jpg',
     link: 'https://github.com/Fietstopa/Crypto-price-tracker',
     tags: ['Node.js', 'MongoDB', 'REST API'],
@@ -28,118 +41,184 @@ const PROJECTS = [
   {
     title: 'BookNest',
     description:
-      'Aplikace s mapou nejbližších knihobudek pro čtenáře a lidi co se chtějí zbavit starých knih.',
+      'Mobilní aplikace s mapou nejbližších knihobudek – pro čtenáře i pro ty, kdo se chtějí zbavit starých knih.',
     image: 'img/booknest.png',
     link: 'https://github.com/Fietstopa/booknest-app',
-    tags: ['Kotlin', 'Mobile', 'App'],
+    tags: ['Kotlin', 'Mobilní app'],
   },
   {
     title: 'Cinemati',
     description:
-      'Web pro zobrazení, ukládání a doporučení filmů s registrací přes Firebase.',
+      'Web pro procházení, ukládání a doporučování filmů s přihlášením přes Firebase.',
     image: 'img/cinemati.png',
     link: 'https://cinemati.vercel.app',
     tags: ['React', 'Firebase', 'TMDB API'],
   },
 ]
 
+const hostOf = (url) => new URL(url).hostname.replace(/^www\./, '')
+
 const ExternalIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <path d="M18 13v8H3V6h8" />
     <polyline points="15 3 21 3 21 9" />
     <line x1="10" y1="14" x2="21" y2="3" />
   </svg>
 )
 
+function FeaturedProject({ title, status, summary, detail, image, link, tags }) {
+  return (
+    <motion.a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="featured-card"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.7, ease: EASE_OUT }}
+      style={{
+        background: 'linear-gradient(var(--green-bg), var(--green-bg)), var(--surface)',
+        border: '1px solid var(--green-border)',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))',
+        marginBottom: '1.5rem',
+      }}
+    >
+      <div style={{ minHeight: '240px', overflow: 'hidden', background: 'var(--surface-2)' }}>
+        <img
+          src={image}
+          alt="Úvodní stránka webu Fuškuj"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', display: 'block' }}
+        />
+      </div>
+
+      <div style={{ padding: 'clamp(1.4rem, 3vw, 2.2rem)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem 1rem' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.5rem 0.9rem' }}>
+            <h3 style={{ fontSize: 'clamp(1.4rem, 2.4vw, 1.8rem)', fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1.15 }}>
+              {title}
+            </h3>
+            <span
+              className="mono"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                color: 'var(--green)',
+                fontSize: '0.75rem',
+                border: '1px solid var(--green-border)',
+                padding: '2px 8px',
+              }}
+            >
+              <span aria-hidden="true" style={{ width: '6px', height: '6px', background: 'var(--green)' }} />
+              {status}
+            </span>
+          </div>
+          <span
+            className="featured-link mono"
+            style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'var(--text-muted)', fontSize: '0.8rem', whiteSpace: 'nowrap' }}
+          >
+            {hostOf(link)} <ExternalIcon />
+          </span>
+        </div>
+
+        <p style={{ color: 'var(--text)', fontSize: '1rem', lineHeight: 1.65 }}>{summary}</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.65 }}>{detail}</p>
+
+        <ul style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: 'auto' }}>
+          {tags.map((tag) => (
+            <li
+              key={tag}
+              className="mono"
+              style={{
+                background: 'var(--green-bg)',
+                border: '1px solid var(--green-border)',
+                padding: '2px 8px',
+                fontSize: '0.75rem',
+                color: 'var(--green)',
+              }}
+            >
+              {tag}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.a>
+  )
+}
+
 function ProjectCard({ title, description, image, link, tags, index }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 40 }}
+    <motion.a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="project-card"
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
-      whileHover={{ y: -6 }}
+      transition={{ duration: 0.7, delay: (index % 3) * 0.08, ease: EASE_OUT }}
       style={{
         background: 'rgba(20, 20, 20, 0.7)',
         border: '1px solid rgba(255,255,255,0.07)',
-        borderRadius: '16px',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
-        transition: 'border-color 0.3s',
       }}
-      data-cursor-hover
     >
-      {/* Image */}
-      <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/9' }}>
-        <motion.img
+      <div style={{ overflow: 'hidden', aspectRatio: '16/9', background: 'rgba(30,30,30,0.5)' }}>
+        <img
           src={image}
-          alt={title}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            display: 'block',
-          }}
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.4 }}
+          alt=""
+          loading="lazy"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to bottom, transparent 40%, rgba(14,14,14,0.85) 100%)',
-        }} />
       </div>
 
-      {/* Content */}
       <div style={{ padding: '1.4rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem' }}>
-          <h3 style={{ fontSize: '1.15rem', fontWeight: 700, lineHeight: 1.2 }}>{title}</h3>
-          <motion.a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'baseline', gap: '0.25rem 0.75rem' }}>
+          <h3 style={{ fontSize: '1.1rem', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.2 }}>{title}</h3>
+          <span
+            className="project-link mono"
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '5px',
-              color: 'var(--accent-mid)',
+              color: 'var(--text-muted)',
               fontSize: '0.8rem',
-              fontWeight: 600,
+              fontWeight: 500,
               whiteSpace: 'nowrap',
               flexShrink: 0,
             }}
-            whileHover={{ color: '#e100ff' }}
           >
-            Otevřít <ExternalIcon />
-          </motion.a>
+            {hostOf(link)} <ExternalIcon />
+          </span>
         </div>
 
         <p style={{ color: 'rgba(255,255,255,0.62)', fontSize: '0.92rem', lineHeight: 1.65, flex: 1 }}>
           {description}
         </p>
 
-        {/* Tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+        <ul style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
           {tags.map((tag) => (
-            <span
+            <li
               key={tag}
+              className="mono"
               style={{
-                background: 'rgba(127,0,255,0.12)',
-                border: '1px solid rgba(127,0,255,0.25)',
-                borderRadius: '6px',
-                padding: '3px 10px',
-                fontSize: '0.78rem',
-                color: '#c060ff',
-                fontWeight: 500,
+                background: 'var(--surface-2)',
+                border: '1px solid var(--border)',
+                padding: '2px 8px',
+                fontSize: '0.75rem',
+                color: 'var(--text-muted)',
               }}
             >
               {tag}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
-    </motion.article>
+    </motion.a>
   )
 }
 
@@ -153,29 +232,9 @@ export default function Projects() {
       }}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <motion.p
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          style={{ color: 'var(--accent-mid)', fontSize: '0.9rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '0.5rem' }}
-        >
-          {'<Projekty />'}
-        </motion.p>
+        <SectionHeading>Co jsem postavil</SectionHeading>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{
-            fontSize: 'clamp(2rem, 4vw, 3rem)',
-            fontWeight: 700,
-            letterSpacing: '-0.02em',
-            marginBottom: '3rem',
-          }}
-        >
-          Co jsem <span className="gradient-text">postavil</span>
-        </motion.h2>
+        <FeaturedProject {...FEATURED} />
 
         <div style={{
           display: 'grid',
@@ -187,6 +246,21 @@ export default function Projects() {
           ))}
         </div>
       </div>
+
+      <style>{`
+        .project-card { transition: border-color 0.2s, background 0.2s; }
+        .project-card img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .project-card .project-link { transition: color 0.2s; }
+        .project-card:hover { border-color: var(--border-strong) !important; background: var(--surface-2) !important; }
+        .project-card:hover img { transform: scale(1.03); }
+        .project-card:hover .project-link { color: var(--text) !important; }
+        .featured-card { transition: border-color 0.2s; }
+        .featured-card img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .featured-card .featured-link { transition: color 0.2s; }
+        .featured-card:hover { border-color: var(--green) !important; }
+        .featured-card:hover img { transform: scale(1.02); }
+        .featured-card:hover .featured-link { color: var(--green) !important; }
+      `}</style>
     </section>
   )
 }

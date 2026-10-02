@@ -17,7 +17,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
@@ -41,18 +41,18 @@ export default function Navbar() {
           justifyContent: 'space-between',
           padding: '0 clamp(1.5rem, 5vw, 3rem)',
           background: scrolled
-            ? 'rgba(12, 12, 12, 0.92)'
-            : 'rgba(12, 12, 12, 0.6)',
+            ? 'rgba(0, 0, 0, 0.8)'
+            : 'rgba(0, 0, 0, 0.5)',
           backdropFilter: 'blur(16px)',
           borderBottom: scrolled
-            ? '1px solid rgba(127, 0, 255, 0.15)'
+            ? '1px solid var(--border)'
             : '1px solid transparent',
           transition: 'background 0.3s, border-color 0.3s',
         }}
       >
         {/* Logo */}
-        <a href="#" style={{ fontWeight: 700, fontSize: '1.2rem', letterSpacing: '-0.02em' }}>
-          <span className="gradient-text">Bohdan</span>
+        <a href="#" style={{ fontWeight: 600, fontSize: '1.1rem', letterSpacing: '-0.03em' }}>
+          <span>Bohdan</span>
           <span style={{ color: 'var(--text-muted)' }}>Myshko</span>
         </a>
 
@@ -66,23 +66,22 @@ export default function Navbar() {
           <motion.a
             href={`${import.meta.env.BASE_URL}bohdan_myshko_cv.pdf`}
             download="Bohdan-Myshko-CV.pdf"
+            className="mono"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(127,0,255,0.45)' }}
-            whileTap={{ scale: 0.96 }}
+            whileHover={{ y: -1 }}
+            whileTap={{ y: 0, scale: 0.97 }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              background: 'linear-gradient(135deg, #7f00ff, #e100ff)',
-              color: 'white',
+              background: 'var(--text)',
+              color: 'var(--bg)',
               fontWeight: 600,
               fontSize: '0.9rem',
               padding: '8px 16px',
-              borderRadius: '8px',
               letterSpacing: '0.02em',
             }}
-            data-cursor-hover
           >
             cv.pdf
           </motion.a>
@@ -90,7 +89,8 @@ export default function Navbar() {
 
         {/* Hamburger */}
         <button
-          aria-label="Menu"
+          aria-label={open ? 'Zavřít menu' : 'Otevřít menu'}
+          aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
           className="burger"
           style={{
@@ -119,8 +119,7 @@ export default function Navbar() {
                 display: 'block',
                 width: '24px',
                 height: '2px',
-                backgroundColor: 'white',
-                borderRadius: '2px',
+                backgroundColor: 'var(--text)',
                 transformOrigin: 'center',
               }}
             />
@@ -143,9 +142,9 @@ export default function Navbar() {
               right: 0,
               bottom: 0,
               width: 'min(320px, 85vw)',
-              background: 'rgba(10, 10, 10, 0.97)',
+              background: 'rgba(0, 0, 0, 0.97)',
               backdropFilter: 'blur(20px)',
-              borderLeft: '1px solid rgba(127, 0, 255, 0.2)',
+              borderLeft: '1px solid var(--border)',
               zIndex: 999,
               display: 'flex',
               flexDirection: 'column',
@@ -165,12 +164,12 @@ export default function Navbar() {
                 style={{
                   fontSize: '1.6rem',
                   fontWeight: 600,
-                  color: 'white',
+                  color: 'var(--text)',
                   padding: '0.6rem 0',
-                  borderBottom: '1px solid rgba(255,255,255,0.06)',
+                  borderBottom: '1px solid var(--border)',
                   display: 'block',
                 }}
-                whileHover={{ x: 8, color: '#9a06df' }}
+                whileHover={{ x: 8, color: 'var(--text-muted)' }}
               >
                 {link.label}
               </motion.a>
@@ -178,6 +177,8 @@ export default function Navbar() {
             <motion.a
               href={`${import.meta.env.BASE_URL}bohdan_myshko_cv.pdf`}
               download="Bohdan-Myshko-CV.pdf"
+              className="mono"
+            className="mono"
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLink}
@@ -186,12 +187,11 @@ export default function Navbar() {
               transition={{ delay: NAV_LINKS.length * 0.06, duration: 0.3 }}
               style={{
                 marginTop: '1rem',
-                background: 'linear-gradient(135deg, #7f00ff, #e100ff)',
-                color: 'white',
+                background: 'var(--text)',
+                color: 'var(--bg)',
                 fontWeight: 600,
                 fontSize: '1.1rem',
                 padding: '0.8rem 1.4rem',
-                borderRadius: '10px',
                 textAlign: 'center',
                 letterSpacing: '0.02em',
                 alignSelf: 'flex-start',
@@ -237,27 +237,14 @@ function NavLink({ href, children }) {
     <motion.a
       href={href}
       style={{
-        fontSize: '1rem',
-        fontWeight: 500,
+        fontSize: '0.92rem',
+        fontWeight: 400,
         color: 'var(--text-muted)',
-        position: 'relative',
       }}
-      whileHover={{ color: '#ffffff' }}
+      whileHover={{ color: '#ededed' }}
       transition={{ duration: 0.15 }}
     >
       {children}
-      <motion.span
-        style={{
-          position: 'absolute',
-          bottom: '-3px',
-          left: 0,
-          height: '1.5px',
-          background: 'linear-gradient(to right, #7f00ff, #e100ff)',
-          width: '0%',
-        }}
-        whileHover={{ width: '100%' }}
-        transition={{ duration: 0.25 }}
-      />
     </motion.a>
   )
 }

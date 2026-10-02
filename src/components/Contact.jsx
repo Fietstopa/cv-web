@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import SectionHeading, { Reveal } from "./SectionHeading";
 
 // ============================================================
 // Nastav tyto hodnoty po registraci na emailjs.com
@@ -18,29 +19,21 @@ const SOCIAL = [
     name: "GitHub",
     icon: "img/gh.png",
     href: "https://github.com/Fietstopa",
-    color: "#6e7681",
-    hoverColor: "#e0e0e0",
   },
   {
     name: "LinkedIn",
     icon: "img/linkedin.png",
     href: "https://www.linkedin.com/in/bohdan-myshko-716577206/",
-    color: "#0a66c2",
-    hoverColor: "#0a66c2",
   },
   {
     name: "Instagram",
     icon: "img/ig.png",
     href: "https://www.instagram.com/bohdxn.x/",
-    color: "#e1306c",
-    hoverColor: "#e1306c",
   },
   {
     name: "Facebook",
     icon: "img/fb.png",
     href: "https://www.facebook.com/profile.php?id=100014153014796",
-    color: "#4267b2",
-    hoverColor: "#4267b2",
   },
 ];
 
@@ -58,18 +51,17 @@ function FloatingInput({
 
   const sharedStyle = {
     width: "100%",
-    background: "rgba(255,255,255,0.04)",
-    border: `1px solid ${focused ? "rgba(127,0,255,0.6)" : "rgba(255,255,255,0.1)"}`,
-    borderRadius: "10px",
+    background: "var(--bg)",
+    border: `1px solid ${focused ? "var(--accent)" : "var(--border-strong)"}`,
     padding: textarea ? "2.2rem 1.1rem 0.9rem" : "1.6rem 1.1rem 0.5rem",
-    color: "white",
+    color: "var(--text)",
     fontSize: "1rem",
-    fontFamily: "Space Grotesk, sans-serif",
+    fontFamily: "inherit",
     outline: "none",
     resize: textarea ? "vertical" : undefined,
     minHeight: textarea ? "130px" : undefined,
     transition: "border-color 0.25s, box-shadow 0.25s",
-    boxShadow: focused ? "0 0 0 3px rgba(127,0,255,0.12)" : "none",
+    boxShadow: focused ? "0 0 0 3px var(--accent-bg)" : "none",
   };
 
   return (
@@ -82,9 +74,9 @@ function FloatingInput({
           fontSize: raised ? "0.72rem" : "0.95rem",
           color: raised
             ? focused
-              ? "#b060ff"
-              : "rgba(255,255,255,0.45)"
-            : "rgba(255,255,255,0.45)",
+              ? "var(--accent-text)"
+              : "var(--text-muted)"
+            : "var(--text-muted)",
         }}
         transition={{ duration: 0.2 }}
         style={{
@@ -97,7 +89,7 @@ function FloatingInput({
         }}
       >
         {label}
-        {required && <span style={{ color: "#9a06df" }}> *</span>}
+        {required && <span style={{ color: "var(--text-muted)" }}> *</span>}
       </motion.label>
 
       {textarea ? (
@@ -200,95 +192,57 @@ export default function Contact() {
       }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <motion.p
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          style={{
-            color: "var(--accent-mid)",
-            fontSize: "0.9rem",
-            fontWeight: 600,
-            letterSpacing: "0.1em",
-            marginBottom: "0.5rem",
-          }}
-        >
-          {"<Kontakt />"}
-        </motion.p>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{
-            fontSize: "clamp(2rem, 4vw, 3rem)",
-            fontWeight: 700,
-            letterSpacing: "-0.02em",
-            marginBottom: "3.5rem",
-          }}
-        >
-          Pojďme <span className="gradient-text">spolupracovat</span>
-        </motion.h2>
+        <SectionHeading style={{ marginBottom: "3.5rem" }}>Napiš mi</SectionHeading>
 
         <div
           style={{
             display: "grid",
             gridTemplateColumns:
               "repeat(auto-fit, minmax(min(100%, 400px), 1fr))",
-            gap: "clamp(2rem, 5vw, 4rem)",
+            gap: "clamp(2.5rem, 6vw, 5rem)",
             alignItems: "start",
           }}
         >
           {/* ── Left panel – info ── */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
+          <Reveal
+            style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}
           >
             <div>
               <p
                 style={{
-                  color: "rgba(255,255,255,0.68)",
+                  color: "var(--text-muted)",
                   lineHeight: 1.8,
                   fontSize: "1.05rem",
+                  maxWidth: "42ch",
+                  marginBottom: "1.5rem",
                 }}
               >
                 Máš projekt, nápad nebo chceš jen říct ahoj? Napiš mi – odpovím
-                co nejdříve.
+                co nejdříve. Aktuálně mám prostor na nové projekty.
               </p>
-            </div>
-
-            {/* Contact info cards */}
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-            >
-              <InfoCard
-                label="Email"
-                value="bmisko984@gmail.com"
-                icon={<MailIcon />}
-              />
-              <InfoCard
-                label="Dostupnost"
-                value="Otevřen novým projektům"
-                icon={<CalendarIcon />}
-                highlight
-                online
-              />
+              <a
+                href="mailto:bmisko984@gmail.com"
+                className="contact-email"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.6rem",
+                  fontSize: "clamp(1.15rem, 2.4vw, 1.5rem)",
+                  fontWeight: 500,
+                  letterSpacing: "-0.02em",
+                  paddingBottom: "4px",
+                  borderBottom: "1px solid var(--border-strong)",
+                }}
+              >
+                <MailIcon />
+                bmisko984@gmail.com
+              </a>
             </div>
 
             {/* Social links */}
             <div>
-              <p
-                style={{
-                  color: "var(--text-muted)",
-                  fontSize: "0.85rem",
-                  marginBottom: "0.9rem",
-                  letterSpacing: "0.05em",
-                }}
-              >
-                NAJDEŠ MĚ TÉŽ NA
+              <p className="label" style={{ marginBottom: "0.9rem" }}>
+                Najdeš mě i na
               </p>
               <div style={{ display: "flex", gap: "0.7rem", flexWrap: "wrap" }}>
                 {SOCIAL.map((s) => (
@@ -297,24 +251,23 @@ export default function Contact() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={s.name}
                     title={s.name}
-                    whileHover={{ scale: 1.12, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ y: -2, borderColor: "rgba(255,255,255,0.3)" }}
+                    whileTap={{ y: 0, scale: 0.96 }}
                     style={{
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       width: "46px",
                       height: "46px",
-                      background: "rgba(255,255,255,0.05)",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      borderRadius: "10px",
+                      background: "var(--surface)",
+                      border: "1px solid var(--border)",
                     }}
-                    data-cursor-hover
                   >
                     <img
                       src={s.icon}
-                      alt={s.name}
+                      alt=""
                       style={{
                         width: "20px",
                         height: "20px",
@@ -325,32 +278,26 @@ export default function Contact() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </Reveal>
 
           {/* ── Right panel – form ── */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
+          <Reveal delay={0.1}>
             <form
               onSubmit={handleSubmit}
               style={{
-                background: "rgba(16, 16, 16, 0.75)",
-                border: "1px solid rgba(255,255,255,0.07)",
-                borderRadius: "20px",
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
                 padding: "clamp(1.5rem, 4vw, 2.5rem)",
                 display: "flex",
                 flexDirection: "column",
                 gap: "1.2rem",
-                backdropFilter: "blur(12px)",
               }}
             >
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
+                  gridTemplateColumns:
+                    "repeat(auto-fit, minmax(min(100%, 200px), 1fr))",
                   gap: "1.2rem",
                 }}
               >
@@ -392,20 +339,14 @@ export default function Contact() {
               <motion.button
                 type="submit"
                 disabled={status === "sending" || status === "success"}
-                whileHover={
-                  status === "idle"
-                    ? { scale: 1.02, boxShadow: "0 0 30px rgba(127,0,255,0.3)" }
-                    : {}
-                }
-                whileTap={status === "idle" ? { scale: 0.98 } : {}}
+                whileHover={status === "idle" ? { y: -2 } : {}}
+                whileTap={status === "idle" ? { y: 0, scale: 0.98 } : {}}
                 style={{
                   width: "100%",
                   padding: "14px",
-                  borderRadius: "10px",
                   border: "none",
-                  fontWeight: 700,
+                  fontWeight: 500,
                   fontSize: "1rem",
-                  letterSpacing: "0.03em",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -413,14 +354,13 @@ export default function Contact() {
                   transition: "background 0.3s, opacity 0.2s",
                   background:
                     status === "success"
-                      ? "linear-gradient(135deg, #0d9f4f, #16c265)"
+                      ? "#0f9d58"
                       : status === "error"
-                        ? "rgba(220, 38, 38, 0.8)"
-                        : "linear-gradient(135deg, #7f00ff, #e100ff)",
-                  color: "white",
+                        ? "var(--danger)"
+                        : "var(--text)",
+                  color: status === "idle" || status === "sending" ? "var(--bg)" : "#fff",
                   opacity: status === "sending" ? 0.7 : 1,
                 }}
-                data-cursor-hover
               >
                 <AnimatePresence mode="wait">
                   {status === "idle" && (
@@ -475,109 +415,37 @@ export default function Contact() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                     >
-                      Chyba – zkus to znovu
+                      Neodesláno – zkus to znovu
                     </motion.span>
                   )}
                 </AnimatePresence>
               </motion.button>
 
               <p
+                role="status"
+                aria-live="polite"
                 style={{
-                  color: "rgba(255,255,255,0.3)",
-                  fontSize: "0.78rem",
+                  color: status === "error" ? "var(--danger)" : "var(--text-muted)",
+                  fontSize: "0.85rem",
                   textAlign: "center",
+                  minHeight: "1.4em",
                 }}
               >
-                Email ti přijde přímo do mé schránky.
+                {status === "error" &&
+                  "Zprávu se nepodařilo odeslat. Zkus to za chvíli, nebo mi napiš přímo na email."}
+                {status === "success" && "Díky! Ozvu se ti co nejdřív."}
               </p>
             </form>
-          </motion.div>
+          </Reveal>
         </div>
       </div>
+      <style>{`
+        .contact-email { transition: color 0.2s, border-color 0.2s; }
+        .contact-email svg { color: var(--text-muted); transition: color 0.2s; }
+        .contact-email:hover { color: var(--accent-text); border-color: var(--accent) !important; }
+        .contact-email:hover svg { color: var(--accent-text); }
+      `}</style>
     </section>
-  );
-}
-
-function InfoCard({ label, value, icon, highlight, online }) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "1rem",
-        padding: "0.9rem 1.1rem",
-        background: highlight
-          ? "rgba(127,0,255,0.08)"
-          : "rgba(255,255,255,0.03)",
-        border: `1px solid ${highlight ? "rgba(127,0,255,0.25)" : "rgba(255,255,255,0.07)"}`,
-        borderRadius: "12px",
-      }}
-    >
-      <div
-        style={{
-          width: "38px",
-          height: "38px",
-          borderRadius: "9px",
-          background: highlight
-            ? "rgba(127,0,255,0.2)"
-            : "rgba(255,255,255,0.07)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: highlight ? "#c060ff" : "rgba(255,255,255,0.5)",
-          flexShrink: 0,
-        }}
-      >
-        {icon}
-      </div>
-      <div>
-        <div
-          style={{
-            fontSize: "0.75rem",
-            color: "rgba(255,255,255,0.4)",
-            marginBottom: "1px",
-            letterSpacing: "0.05em",
-          }}
-        >
-          {label}
-        </div>
-        <div
-          style={{
-            fontSize: "0.95rem",
-            fontWeight: 600,
-            color: highlight ? "#c060ff" : "white",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-          }}
-        >
-          {online && (
-            <motion.span
-              aria-label="Online"
-              animate={{
-                opacity: [0.55, 1, 0.55],
-                scale: [0.9, 1.08, 0.9],
-                boxShadow: [
-                  "0 0 0 0 rgba(34,197,94,0.55)",
-                  "0 0 0 6px rgba(34,197,94,0)",
-                  "0 0 0 0 rgba(34,197,94,0)",
-                ],
-              }}
-              transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
-              style={{
-                width: "10px",
-                height: "10px",
-                borderRadius: "50%",
-                background: "#22c55e",
-                display: "inline-block",
-                flexShrink: 0,
-              }}
-            />
-          )}
-          {value}
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -605,24 +473,8 @@ const MailIcon = () => (
     stroke="currentColor"
     strokeWidth="1.8"
   >
-    <rect x="2" y="4" width="20" height="16" rx="2" />
-    <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
+    <rect x="2" y="4" width="20" height="16" />
+    <path d="M2 6l10 7 10-7" />
   </svg>
 );
 
-const CalendarIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-  >
-    <rect x="3" y="4" width="18" height="18" rx="2" />
-    <line x1="16" y1="2" x2="16" y2="6" />
-    <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-    <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" />
-  </svg>
-);

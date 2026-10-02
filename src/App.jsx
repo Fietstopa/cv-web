@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import CustomCursor from './components/CustomCursor'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -25,12 +24,17 @@ export default function App() {
   const isHobbies = hash.startsWith('#/konicky')
 
   useEffect(() => {
-    if (isHobbies) window.scrollTo({ top: 0, behavior: 'auto' })
-  }, [isHobbies])
+    if (isHobbies) {
+      window.scrollTo({ top: 0, behavior: 'auto' })
+      return
+    }
+    // Coming back from the hobbies route the target section mounts after the hash changes
+    const target = hash.length > 1 && document.getElementById(hash.slice(1))
+    if (target) target.scrollIntoView()
+  }, [isHobbies, hash])
 
   return (
     <>
-      <CustomCursor />
       <Navbar />
       <main>
         {isHobbies ? (

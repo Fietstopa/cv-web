@@ -1,11 +1,11 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
+import SectionHeading, { EASE_OUT } from './SectionHeading'
 
 const EDUCATION = [
   {
     years: '2017 – 2019',
     school: 'ZŠ Morávkova 40',
-    description: 'Základní škola – základ vzdělání.',
     image: 'img/moravkova.png',
     side: 'left',
     active: false,
@@ -20,7 +20,7 @@ const EDUCATION = [
   },
   {
     years: '2023 – 2026',
-    school: 'Mendelova Univerzita – Otevřená Informatika',
+    school: 'Mendelova univerzita – Otevřená informatika',
     description: 'Bakalářský program zaměřený na softwarové inženýrství, databáze a moderní technologie. PEF – Provozně ekonomická fakulta.',
     image: 'img/pef.png',
     side: 'left',
@@ -43,61 +43,55 @@ function useIsMobile(bp = 680) {
 
 function EduCard({ years, school, description, image, active }) {
   return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
+    <div
       style={{
-        background: 'rgba(20, 20, 20, 0.8)',
-        border: `1px solid ${active ? 'rgba(127,0,255,0.35)' : 'rgba(255,255,255,0.07)'}`,
-        borderRadius: '14px',
+        background: 'var(--surface)',
+        border: `1px solid ${active ? 'var(--accent-border)' : 'var(--border)'}`,
         overflow: 'hidden',
-        boxShadow: active ? '0 0 40px rgba(127,0,255,0.1)' : 'none',
       }}
     >
-      <div style={{ height: '200px', overflow: 'hidden', background: 'rgba(30,30,30,0.5)' }}>
+      <div style={{ height: '200px', overflow: 'hidden', background: 'var(--surface-2)' }}>
         <img
           src={image}
-          alt={school}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.75 }}
+          alt=""
+          loading="lazy"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.8 }}
         />
       </div>
       <div style={{ padding: '1.2rem' }}>
-        <span style={{
+        <span className="mono" style={{
           display: 'inline-block',
-          background: active ? 'rgba(127,0,255,0.15)' : 'rgba(255,255,255,0.06)',
-          border: `1px solid ${active ? 'rgba(127,0,255,0.35)' : 'rgba(255,255,255,0.1)'}`,
-          borderRadius: '999px',
-          padding: '2px 12px',
-          fontSize: '0.78rem',
-          color: active ? '#c060ff' : 'var(--text-muted)',
-          marginBottom: '0.7rem',
-          fontWeight: 600,
+          background: active ? 'var(--accent-bg)' : 'var(--surface-2)',
+          border: `1px solid ${active ? 'var(--accent-border)' : 'var(--border)'}`,
+          padding: '2px 8px',
+          fontSize: '0.75rem',
+          color: active ? 'var(--accent-text)' : 'var(--text-muted)',
+          marginBottom: '0.8rem',
         }}>
           {years}{active ? ' · aktuálně' : ''}
         </span>
-        <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem', lineHeight: 1.35 }}>
+        <h3 style={{ fontSize: '1.05rem', fontWeight: 600, letterSpacing: '-0.01em', marginBottom: '0.4rem', lineHeight: 1.35 }}>
           {school}
         </h3>
-        <p style={{ color: 'rgba(255,255,255,0.58)', fontSize: '0.88rem', lineHeight: 1.65 }}>
-          {description}
-        </p>
+        {description && (
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.65 }}>
+            {description}
+          </p>
+        )}
       </div>
-    </motion.div>
+    </div>
   )
 }
 
-function Dot({ active, inView, delay }) {
+function Dot({ active }) {
   return (
-    <motion.div
-      animate={inView ? { scale: [0, 1.4, 1] } : {}}
-      transition={{ duration: 0.45, delay }}
+    <div
       style={{
-        width: active ? '18px' : '13px',
-        height: active ? '18px' : '13px',
-        borderRadius: '50%',
-        background: active ? 'linear-gradient(135deg, #7f00ff, #e100ff)' : 'rgba(127,0,255,0.5)',
-        border: active ? '3px solid rgba(225,0,255,0.35)' : '2px solid rgba(127,0,255,0.3)',
-        boxShadow: active ? '0 0 20px rgba(127,0,255,0.5)' : 'none',
+        width: active ? '16px' : '12px',
+        height: active ? '16px' : '12px',
+        background: active ? 'var(--accent)' : 'var(--bg)',
+        border: `1px solid ${active ? 'var(--accent)' : 'var(--border-strong)'}`,
+        outline: active ? '4px solid var(--accent-bg)' : 'none',
         flexShrink: 0,
       }}
     />
@@ -110,7 +104,7 @@ function TimelineItem({ item, index }) {
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const isMobile = useIsMobile()
   const isLeft = side === 'left'
-  const delay = index * 0.12
+  const delay = index * 0.08
 
   const cardEl = <EduCard years={years} school={school} description={description} image={image} active={active} />
 
@@ -118,13 +112,13 @@ function TimelineItem({ item, index }) {
     return (
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, x: -30 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.6, ease: 'easeOut', delay }}
+        initial={{ opacity: 0, y: 24 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, ease: EASE_OUT, delay }}
         style={{ display: 'flex', gap: '1.2rem', alignItems: 'flex-start', marginBottom: '2rem' }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0, paddingTop: '1.2rem' }}>
-          <Dot active={active} inView={inView} delay={delay + 0.2} />
+          <Dot active={active} />
         </div>
         <div style={{ flex: 1 }}>{cardEl}</div>
       </motion.div>
@@ -134,9 +128,9 @@ function TimelineItem({ item, index }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.7, ease: 'easeOut', delay }}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, ease: EASE_OUT, delay }}
       style={{
         display: 'grid',
         gridTemplateColumns: '1fr 48px 1fr',
@@ -151,7 +145,7 @@ function TimelineItem({ item, index }) {
 
       {/* Dot */}
       <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '1.2rem' }}>
-        <Dot active={active} inView={inView} delay={delay + 0.2} />
+        <Dot active={active} />
       </div>
 
       {/* Right cell */}
@@ -172,35 +166,7 @@ export default function Education() {
         margin: '0 auto',
         position: 'relative',
       }}>
-      <motion.p
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        style={{
-          color: 'var(--accent-mid)',
-          fontSize: '0.9rem',
-          fontWeight: 600,
-          letterSpacing: '0.1em',
-          marginBottom: '0.5rem',
-        }}
-      >
-        {'<Vzdělání />'}
-      </motion.p>
-
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        style={{
-          fontSize: 'clamp(2rem, 4vw, 3rem)',
-          fontWeight: 700,
-          letterSpacing: '-0.02em',
-          marginBottom: '4rem',
-        }}
-      >
-        Moje <span className="gradient-text">vzdělání</span>
-      </motion.h2>
+      <SectionHeading style={{ marginBottom: '4rem' }}>Vzdělání</SectionHeading>
 
       <div style={{ position: 'relative' }}>
         {/* Center line (desktop only) */}
@@ -209,9 +175,9 @@ export default function Education() {
             position: 'absolute',
             top: 0,
             bottom: 0,
-            left: 'calc(50% - 1px)',
-            width: '2px',
-            background: 'linear-gradient(to bottom, transparent, rgba(127,0,255,0.45) 8%, rgba(127,0,255,0.4) 92%, transparent)',
+            left: '50%',
+            width: '1px',
+            background: 'var(--border-strong)',
             pointerEvents: 'none',
           }} />
         )}
@@ -222,8 +188,8 @@ export default function Education() {
             top: 0,
             bottom: 0,
             left: '6px',
-            width: '2px',
-            background: 'linear-gradient(to bottom, transparent, rgba(127,0,255,0.45) 8%, rgba(127,0,255,0.4) 92%, transparent)',
+            width: '1px',
+            background: 'var(--border-strong)',
             pointerEvents: 'none',
           }} />
         )}

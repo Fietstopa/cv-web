@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import SectionHeading, { Reveal } from './SectionHeading'
 
 const EXPERIENCE = [
   {
@@ -8,58 +8,51 @@ const EXPERIENCE = [
     description:
       'Navrhoval jsem designy ve Figmě od nuly a vyvíjel komponenty do jejich in-house CMS.',
     image: 'img/foxmedia.png',
-    active: false,
   },
 ]
 
-function ExpCard({ period, role, company, description, image, active }) {
+function ExpCard({ period, role, company, description, image }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.6 }}
-      whileHover={{ scale: 1.015 }}
+    <Reveal
       style={{
-        background: 'rgba(20, 20, 20, 0.8)',
-        border: `1px solid ${active ? 'rgba(127,0,255,0.35)' : 'rgba(255,255,255,0.07)'}`,
-        borderRadius: '14px',
+        background: 'var(--surface)',
+        border: '1px solid var(--border)',
         overflow: 'hidden',
-        boxShadow: active ? '0 0 40px rgba(127,0,255,0.1)' : 'none',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
       }}
     >
-      <div style={{ height: '200px', overflow: 'hidden', background: 'rgba(30,30,30,0.5)' }}>
+      <div style={{ minHeight: '200px', overflow: 'hidden', background: 'var(--surface-2)' }}>
         <img
           src={image}
-          alt={company}
+          alt=""
+          loading="lazy"
           style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.85 }}
         />
       </div>
-      <div style={{ padding: '1.4rem' }}>
-        <span style={{
+      <div style={{ padding: 'clamp(1.4rem, 3vw, 2rem)', alignSelf: 'center' }}>
+        <span className="mono" style={{
           display: 'inline-block',
-          background: active ? 'rgba(127,0,255,0.15)' : 'rgba(255,255,255,0.06)',
-          border: `1px solid ${active ? 'rgba(127,0,255,0.35)' : 'rgba(255,255,255,0.1)'}`,
-          borderRadius: '999px',
-          padding: '2px 12px',
-          fontSize: '0.78rem',
-          color: active ? '#c060ff' : 'var(--text-muted)',
-          marginBottom: '0.7rem',
-          fontWeight: 600,
+          background: 'var(--surface-2)',
+          border: '1px solid var(--border)',
+          padding: '2px 8px',
+          fontSize: '0.75rem',
+          color: 'var(--text-muted)',
+          marginBottom: '0.8rem',
         }}>
           {period}
         </span>
-        <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '0.3rem', lineHeight: 1.35 }}>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 600, letterSpacing: '-0.02em', marginBottom: '0.3rem', lineHeight: 1.3 }}>
           {role}
         </h3>
-        <p style={{ color: 'var(--accent-mid)', fontSize: '0.9rem', fontWeight: 600, marginBottom: '0.6rem' }}>
+        <p style={{ color: 'var(--accent-text)', fontSize: '0.92rem', fontWeight: 500, marginBottom: '0.8rem' }}>
           {company}
         </p>
-        <p style={{ color: 'rgba(255,255,255,0.62)', fontSize: '0.92rem', lineHeight: 1.65 }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '55ch' }}>
           {description}
         </p>
       </div>
-    </motion.div>
+    </Reveal>
   )
 }
 
@@ -70,41 +63,9 @@ export default function Experience() {
         maxWidth: '1200px',
         margin: '0 auto',
       }}>
-        <motion.p
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          style={{
-            color: 'var(--accent-mid)',
-            fontSize: '0.9rem',
-            fontWeight: 600,
-            letterSpacing: '0.1em',
-            marginBottom: '0.5rem',
-          }}
-        >
-          {'<Zkušenosti />'}
-        </motion.p>
+        <SectionHeading>Pracovní zkušenosti</SectionHeading>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{
-            fontSize: 'clamp(2rem, 4vw, 3rem)',
-            fontWeight: 700,
-            letterSpacing: '-0.02em',
-            marginBottom: '3rem',
-          }}
-        >
-          Moje <span className="gradient-text">zkušenosti</span>
-        </motion.h2>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))',
-          gap: '1.5rem',
-        }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '900px' }}>
           {EXPERIENCE.map((item) => (
             <ExpCard key={item.company} {...item} />
           ))}
